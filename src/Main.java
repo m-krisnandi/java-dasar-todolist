@@ -2,7 +2,8 @@ public class Main {
     public static String[] model = new String[10];
 
     public static void main(String[] args) {
-        testShowTodoList();
+        // testShowTodoList();
+        testAddTodoList();
     }
 
     /**
@@ -22,6 +23,44 @@ public class Main {
     public static void testShowTodoList() {
         model[0] = "Belajar Java Dasar";
         model[1] = "Studi Kasus Java Dasar : Aplikasi Todolist";
+        showTodoList();
+    }
+
+    public static void addTodoList(String todo) {
+        // cek apakah model penuh?
+        var isFull = true;
+        for (int i = 0; i < model.length; i++) {
+            if (model[i] == null) {
+                // model masih ada yang kosong
+                isFull = false;
+                break;
+            }
+        }
+
+        // jika penuh, resize ukuran array 2x lipat
+        if (isFull) {
+            var temp = model;
+            model = new String[model.length * 2];
+
+            for (int i = 0; i < temp.length; i++) {
+                model[i] = temp[i];
+            }
+        }
+
+        // tambahkan ke posisi yang data array nya null
+        for (var i = 0; i < model.length; i++) {
+            if (model[i] == null) {
+                model[i] = todo;
+                break;
+            }
+        }
+    }
+
+    public static void testAddTodoList() {
+        for (int i = 0; i < 25; i++) {
+            addTodoList("Contoh Todo ke." + i);
+        }
+
         showTodoList();
     }
 }
